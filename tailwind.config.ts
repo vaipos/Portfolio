@@ -7,14 +7,37 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    backgroundSize: {
+      'auto': 'auto',
+      'cover': 'cover',
+      'contain': 'contain',
+      '50%': '50%',
+      '100': '200%',
+    },
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      colors: {
+        custom: '#F3ECDF',
+        progBar: '#79ADBB',
+        buttonColor: '#eb5e28',
+        quizCardColor: '#72BCC2',
+        startHere: '#DAD0C3',
+        neutral: '#DACCB1',
+        midorange: '#e2b1a8',
+        dustypurp: '#afb6cd',
+        dustypink: '#ffbabc',
+        teal: '#4b93ab',
+        dullteal: '#aac4cb',
+        greyish: '#90908f'
+
+
+
       },
     },
   },
-  plugins: [],
+  daisyui: {
+    themes: ["light"],
+  },
+  plugins: [require("daisyui"),     require('tailwindcss-animated')
+],
 }
 export default config
