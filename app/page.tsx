@@ -4,12 +4,12 @@ import Chunk from "./Top/Chunk";
 import Footer from "./Top/Footer";
 
 import Navbar from "./Top/Navbar";
+import TopSection from "./Top/TopSection";
 
 const page = () => {
   return (
     <>
-      <Navbar />
-      <Chunk />
+   <TopSection/>
       <Part/>
       <Footer/>
 

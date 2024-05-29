@@ -1,10 +1,14 @@
-
+// Navbar.jsx
 "use client";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [stickyPosition, setStickyPosition] = useState({ top: "-100vh", opacity: 0 });
+  const [stickyPosition, setStickyPosition] = useState({
+    top: "-100vh",
+    opacity: 0,
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +28,14 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       {!isScrolled ? (
@@ -55,40 +67,43 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <a>Homepage</a>
+                  <a onClick={() => scrollToSection("about-me")}>About Me</a>
                 </li>
                 <li>
-                  <a>Portfolio</a>
+                  <a onClick={() => scrollToSection("activities")}>Activities</a>
                 </li>
                 <li>
-                  <a>About</a>
+                  <a onClick={() => scrollToSection("tech-stacks")}>Tech Stacks</a>
                 </li>
               </ul>
             </div>
-            <div className=" p-4 ml-1 rounded-lg font-bold  hover:bg-slate-100 ">
+            <div className="p-4 ml-1 rounded-lg font-bold hover:bg-slate-100">
               Vaishnavi Pasumarthi
             </div>
           </div>
 
           <div className="navbar-center">
-            <img src="/3.png" className=" -my-8 scale-50 w-36"></img>
+            <img src="/3.png" className="-my-8 scale-50 w-36"></img>
           </div>
           <div className="navbar-end">
-            <button className="btn btn-ghost btn-circle hover:shadow-indigo-200 hover:shadow-md hover:bg-white">
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
+            <button
+              className="btn btn-ghost btn-circle hover:shadow-indigo-200 hover:shadow-md hover:bg-white"
+              onClick={() => scrollToSection("top-section")}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 0C5.372 0 0 5.373 0 12c0 5.303 3.438 9.8 8.207 11.387.6.113.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.388-1.333-1.758-1.333-1.758-1.09-.745.083-.729.083-.729 1.204.084 1.838 1.236 1.838 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.419-1.305.762-1.605-2.665-.304-5.467-1.333-5.467-5.931 0-1.31.467-2.381 1.235-3.221-.124-.303-.535-1.521.117-3.167 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.004.404 2.292-1.553 3.298-1.23 3.298-1.23.653 1.646.242 2.864.118 3.167.77.84 1.235 1.911 1.235 3.221 0 4.609-2.806 5.624-5.479 5.922.43.371.814 1.103.814 2.222v3.293c0 .32.192.694.799.576C20.565 21.797 24 17.302 24 12c0-6.627-5.373-12-12-12z" />
-                </svg>
-              </a>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M10 20v-6h4v6m5 0v-8h3L12 3 2 12h3v8z"
+                />
+              </svg>
             </button>
             <button className="btn mx-3 btn-ghost btn-circle hover:shadow-indigo-200 hover:shadow-md hover:bg-white">
               <a
@@ -127,17 +142,90 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      ) :
-      (
-      
+      ) : (
         <div
-        className=" z-50 my-10 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-lg shadow-md"
-        style={stickyPosition}
-      >
-        <button className="btn join-item">Button</button>
-        <button className="btn join-item">Button</button>
-        <button className="btn join-item">Button</button>
-      </div>
+          className="z-50 my-10 justify-between fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-50 p-4 rounded-lg shadow-md"
+          style={stickyPosition}
+        >
+          <button className="join-item mx-5">
+            <div className="dropdown bg-base-200 rounded-full">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h7"
+                  />
+                </svg>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <a onClick={() => scrollToSection("about-me")}>About Me</a>
+                </li>
+                <li>
+                  <a onClick={() => scrollToSection("activities")}>Activities</a>
+                </li>
+                <li>
+                  <a onClick={() => scrollToSection("tech-stacks")}>Tech Stacks</a>
+                </li>
+              </ul>
+            </div>
+          </button>
+          <button
+            className="btn join-item mr-5"
+            onClick={() => scrollToSection("top-section")}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M10 20v-6h4v6m5 0v-8h3L12 3 2 12h3v8z"
+              />
+            </svg>
+          </button>
+          <button className="join-item mr-5">
+            <button className="btn btn-circle">
+              <div className="indicator">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                  />
+                </svg>
+                <span className="badge badge-xs badge-primary indicator-item"></span>
+              </div>
+            </button>
+          </button>
+        </div>
       )}
     </>
   );
